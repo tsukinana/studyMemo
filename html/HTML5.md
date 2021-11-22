@@ -1,3 +1,19 @@
+# HTML5
+
+
+
+## formタグ
+
+action=送信先URL
+
+
+
+
+
+---
+
+
+
 ## 2章
 
 ### doctype宣言
