@@ -130,5 +130,151 @@ hello
 
 
 
+## #logger
+
+### logging
+
+```
+from logging import getLogger
+```
+
+loggingメソッドは使わない。(ルートにロガーが渡ることになり。名前空間が汚れるから&& 設定の制御が面倒)
+
+### setlevel
+
+```
+CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET 
+```
+
+loggerとhandlerそれぞれに設定できる。
+
+loggerのレベルはhandlerに渡すレベルの設定(デフォルトでNOTSET)
+
+handlerのレベルは出力するログのレベルの設定
+
+### 書いてみた
+
+```
+from logging import Formatter, getLogger,StreamHandler,DEBUG
+import urllib.request
+
+logger = getLogger(__name__)
+
+#ハンドラに渡すレベル
+logger.setLevel(DEBUG)
+
+#伝播無効
+logger.propagate = False
+
+#フォーマッター
+formatter = Formatter('parent: %(name)s [%(levelname)s] %(message)s')
+
+#ハンドラ生成
+handler = StreamHandler()
+
+#出力するレベル
+handler.setLevel(DEBUG)
+
+#フォーマット紐づけ
+handler.setFormatter(formatter)
+
+#ハンドラ紐づけ
+logger.addHandler(handler)
+```
+
+
+
+## 書いてみたその2
+
+```python
+#!/usr/bin/env python
+#-*-coding: utf-8-*-
+
+from logging import getLogger,config
+import json
+
+if __name__ == "__main__":
+    logger = getLogger(__name__)
+    with open ("./log_config.json") as f:
+        log_conf = json.load(f)
+        config.dictConfig(log_conf)
+    logger.info("test")
+```
+
+設定ファイルで下記を持つ
+
+```json
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+
+
+    "formatters": {
+        "simple": {
+            "format": "%(asctime)s %(name)s:%(lineno)s %(funcName)s [%(levelname)s]: %(message)s"
+        }
+    },
+
+    "handlers": {
+        "consoleHandler": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout"
+        },
+        "logFileHandler": {
+            "class": "logging.FileHandler",
+            "level": "INFO",
+            "formatter": "simple",
+            "filename": "./log.log",
+            "mode": "w",
+            "encoding": "utf-8"
+        }
+    },
+
+    "loggers": {
+        "__main__": {
+            "level": "DEBUG",
+            "handlers": ["consoleHandler", "logFileHandler"],
+            "propagate": false
+        }
+    },
+
+    "root": {
+        "level": "INFO",
+        "handlers": ["consoleHandler"]
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+## アンダースコアの謎
+
+### return値を無視する
+
+```
+x, _, z = (1, 2, 3)
+# x=1, z=3
+```
+
+メモリを占有しないで破棄できる。
+
+
+
+### 関数名の最初にアンダースコアを1つ
+
+→内部用と定義できる。(privateみたいなもん)
+
+
+
 
 
