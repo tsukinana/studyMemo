@@ -41,6 +41,26 @@ month_names= month_names+("March")
 
 
 
+## #上位のconfを読む
+
+書いてみた.
+
+1個上のファイルを読み込む。
+
+```python
+from logging import config
+import json
+import os
+
+with open (os.path.join(os.path.dirname(__file__),"../conf/log_config.json")) as f:
+    log_conf = json.load(f)
+    config.dictConfig(log_conf)
+```
+
+
+
+
+
 
 
 ## #正規表現

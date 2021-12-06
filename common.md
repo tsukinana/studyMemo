@@ -55,6 +55,7 @@ git branch -M main
 git remote add origin https://github.com/tsukinana/studyMemo.git
 # 管理物送信
 git push -u origin main
+→次回からgit pushだけでよい。(-uを付けると今のローカルとマスタを紐づけしたことになる)
 ```
 
 ## gitでバイナリ管理しないほうがいい理由
