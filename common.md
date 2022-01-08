@@ -32,6 +32,28 @@ https://holidaynote.hatenablog.jp/entry/2018/04/21/224858
 
 ## #git 
 
+### git config
+
+```
+#設定の一覧表示(指定なしの場合local,ただしgit管理されてない場合はglobal)
+git config -l
+```
+
+### git add
+
+```
+#バージョン管理されていて変更があったリポジトリ内のすべてのファイルがadd(バージョイン管理されていないファイルは対象外)
+git add -u
+#変更があったリポジトリ内すべてのファイルがaddされる
+git add -A
+#変更があったカレントディレクトリ内のすべてのファイルがaddされる
+git add .
+```
+
+
+
+
+
 ### originって何
 
 リモートリポジトリURLの別名らしい
@@ -42,7 +64,7 @@ git remote get-url origin
 
 で確認できる
 
-### 初期動作
+### 一般的な初動
 
 ```bash
 # git管理スタート
