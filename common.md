@@ -144,7 +144,7 @@ git checkout -- ファイル
 git checkout コミット -- ファイル
 #作業ディレクトリをある地点のcommitに戻す。HEADは戻さない
 git checkout コミット .
-#パスを指定しなかった場合HEADも移動してしまうので注意。reflogで戻してリカバリはできるが。。
+#パスを指定しなかった場合HEADも移動してしまうので注意。git branchやreflogで戻してリカバリはできるが。。
 git checkout コミット
 #ブランチの切り替え　headが対象のブランチの先端と一体化する、中身がステージングと作業ツリーに取り出される
 git checkout ブランチ
@@ -156,7 +156,9 @@ git checkout -b 新ブランチ
 git checkout -b 新ブランチ コミット
 ```
 
-### git checkout -b ブランチ名 コミット
+git checkout コミット
+
+git checkout -b ブランチ名 コミット
 
 この方法で切り出すとheadが切り離された状態になる。(headが先端ではない)
 
