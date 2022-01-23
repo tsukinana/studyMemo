@@ -110,6 +110,15 @@ git show @^:ファイル名
 git show タグ名
 ```
 
+### git reflog show master
+
+```
+#過去のあらゆるコミット履歴をみれる
+git reflog show master
+```
+
+
+
 ### git reset
 
 ```
@@ -133,9 +142,13 @@ git reset --soft コミット
 git checkout -- ファイル
 #あるコミット時のデータをステージングと作業コピーにもってくる
 git checkout コミット -- ファイル
+#作業ディレクトリをある地点のcommitに戻す。HEADは戻さない
+git checkout コミット .
+#パスを指定しなかった場合HEADも移動してしまうので注意。reflogで戻してリカバリはできるが。。
+git checkout コミット
 #ブランチの切り替え　headが対象のブランチの先端と一体化する、中身がステージングと作業ツリーに取り出される
 git checkout ブランチ
-#ブランチの過去
+#ブランチの過去にHEADを移動する。
 git checkout -b ブランチ名 コミット
 #新しいブランチ
 git checkout -b 新ブランチ
@@ -405,7 +418,7 @@ git init
 git add *
 git commit -m "first commit"
 # ブランチ名作成
-git branch  main
+git branch -M main
 # git紐づけ　これでoriginでアクセスできる。
 git remote add origin https://github.com/tsukinana/studyMemo.git
 # 管理物送信
