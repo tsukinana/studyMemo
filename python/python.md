@@ -41,6 +41,24 @@ month_names= month_names+("March")
 
 
 
+## #プログラムの実行場所へ移動する
+
+```python
+os.chdir(os.path.dirname(__file__))
+```
+
+ただし、3.9より前だと`__file__`は絶対pathではなく、純粋にarg[0]を返すっぽい
+
+test.pyとカレントで起動した場合、test.pyだけが`__file__`に入るので下記でやるのがよさそう
+
+```python
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+```
+
+
+
+
+
 ## #上位のconfを読む
 
 書いてみた.
@@ -56,10 +74,6 @@ with open (os.path.join(os.path.dirname(__file__),"../conf/log_config.json")) as
     log_conf = json.load(f)
     config.dictConfig(log_conf)
 ```
-
-
-
-
 
 
 
