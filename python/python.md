@@ -2,6 +2,37 @@
 
 ---
 
+## #import
+
+importしたモジュールがロードされ、トップレベルのコードが実行される。
+
+ただし、2回目以降のimport,fromではロード、実行をデフォルトでは行われない
+
+
+
+## #with構文
+
+```python
+with open (os.path.join(os.path.dirname(__file__),"../conf/log_config.json")) as f:
+    log_name = "./" + datetime.datetime.now().strftime('%Y%m%d%H%M%S') + ".log"
+    print(log_name)
+    log_conf = json.load(f)
+    log_conf['handlers']['logFileHandler']['filename']=log_name
+    config.dictConfig(log_conf)
+
+def org_get_logger(logger_name):
+    print(log_conf)
+    return getLogger(logger_name)
+```
+
+下のdefでlog_confにアクセスできることからわかるよに
+
+with構文はスコープを作らない。
+
+
+
+
+
 ## #データの持ち方
 
 ### リスト
