@@ -121,6 +121,8 @@ git reflog show master
 
 ### git reset
 
+ステージングに作用する。
+
 ```
 #headの内容をステージにコピーする
 git reset
@@ -136,6 +138,8 @@ git reset --soft コミット
 ```
 
 ### git checkout
+
+作業ツリーに作用する
 
 ```
 #ステージングの内容を作業ツリーにコピーする
