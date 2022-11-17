@@ -34,7 +34,7 @@ https://holidaynote.hatenablog.jp/entry/2018/04/21/224858
 
 ### HEAD
 
-現時点の最新のコミットを指す
+現在作業してるブランチの最新のコミットを指す
 
 ### git config
 
@@ -57,10 +57,16 @@ git add .
 ### git log
 
 ```
+#ファイルの中身をみる
+git log -p
+#最新1行
+git log -n 1
 #1行ずつ出せる
 git log --oneline
 #ある変更以降をみる。下記の例はorigin/masterからmasterまでの間
 git log origin/master..master
+#ブランチ情報も添える
+git log --oneline --decorate
 ```
 
 ### git diff
@@ -222,7 +228,9 @@ git revert コミット
 ### ブランチとは
 
 * 一連のコミットの履歴
-* その先端のコミットを指すポインタ
+* コミットを指すポインタ
+* コミットすると最新のコミットに移動する
+* 現在作業中のブランチへのポインタがHEAD
 
 
 
@@ -285,9 +293,61 @@ git merge --no-ff 相手ブランチ
 
 
 
+## コンフリクトについて
+
+異なるブランチで同じ行の修正が入った場合発生。
+
+gitではどちらが正か分からないため以下のファイルができる
+
+```
+<<<<HEAD
+
+hoge
+
+======
+
+fuga
+
+>>>>branch
+```
+
+
+
+
+
 ### git rebase
 
-#todo
+ブランチのコミットを移動できる。本来3点マージにするところを履歴を一直線にできる。
+
+また、ローカルのコミット履歴をやりなおしすることができる。
+
+```
+git rebase -i HEAD~3 #3つ前を起点に直していく。 -i はインタラクティブの略
+削除したいときは行ごと消し、並び替えたい場合は並び替えればよい
+pick
+squash
+にするとsquashの内容がpickに統合される
+```
+
+
+
+### git stash
+
+作業をstashに一時避難する。コミットしたくないけど別のブランチで作業するとき
+
+```
+git stash
+git stash list --避難した作業の一覧を表示
+git stash apply --作業を復元する(ステージは対象外)
+git stash apply --index --ステージの状況も復元する
+git stash apply [スタッシュ名] --特定の作業を復元
+
+git stash drop --最新の作業を削除する
+git stash drop [スタッシュ名]
+git stash clear --すべて削除
+```
+
+
 
 
 
